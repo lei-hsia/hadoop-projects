@@ -22,11 +22,11 @@ public class MyProducer {
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
 
-        KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
+        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
         // 2. 发送消息
         for (int i = 0; i < 100; i++) {
-            producer.send(new ProducerRecord<String, String>("first_topic", "atguigu--"+i));
+            producer.send(new ProducerRecord<>("first_topic", "atguigu--"+i));
         }
 
         // 3. 关闭资源
