@@ -26,6 +26,7 @@ public class MyConsumer {
 
         // 重置消费者的offset
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // 还要换组+这个属性earliest(不是--from-beginning)
+        // 每次consumer拿数据，不论是从zk/kafka本地拿数据，都只是在consumer启动的时候拉取一次，否则会重复消费相同的数据
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
 
