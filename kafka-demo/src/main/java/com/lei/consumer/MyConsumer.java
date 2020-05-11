@@ -24,6 +24,9 @@ public class MyConsumer {
         // 消费者组
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "kafka01");
 
+        // 重置消费者的offset
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // 还要换组+这个属性earliest(不是--from-beginning)
+
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
 
         // 订阅主题
