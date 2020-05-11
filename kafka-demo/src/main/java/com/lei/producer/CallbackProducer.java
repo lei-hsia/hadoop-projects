@@ -24,7 +24,7 @@ public class CallbackProducer {
         list.add("c");
 
         for (int i = 0; i < 100; i++) {
-            producer.send(new ProducerRecord<String, String>("first", 0, "atguigu", "atguigu--" + i), (recordMetadata, e) -> {
+            producer.send(new ProducerRecord<String, String>("first", list.get(i%3), "atguigu--" + i), (recordMetadata, e) -> {
                 if (recordMetadata != null) {
                     System.out.println(recordMetadata.partition() + "---" + recordMetadata.offset());
                 } else {
