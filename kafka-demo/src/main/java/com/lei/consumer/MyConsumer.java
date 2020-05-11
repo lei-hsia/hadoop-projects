@@ -6,7 +6,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Properties;
 
 public class MyConsumer {
@@ -14,10 +13,15 @@ public class MyConsumer {
         Properties properties = new Properties();
         // 连接的集群
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "hadoop102:9092");
+
+        ///////////////////////// 自动提交
         // 开启自动提交
         properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
         // 自动提交的interval
         properties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 1000);
+        ///////////////////////// 其实不管自动提交，手动提交，都可能出现重复或者丢失消息的问题: 需要加事务
+        // 所以维护offset要持久化下来，不能维护在本地内存，这样的
+
         // key value反序列化
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringDeserialization");
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringDeserialization");
@@ -27,6 +31,8 @@ public class MyConsumer {
         // 重置消费者的offset
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // 还要换组+这个属性earliest(不是--from-beginning)
         // 每次consumer拿数据，不论是从zk/kafka本地拿数据，都只是在consumer启动的时候拉取一次，否则会重复消费相同的数据
+
+        /* 自动提交的问题: 因为时间间隔都是固定的，所以会有问题*/
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
 
