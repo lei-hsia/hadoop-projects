@@ -2,6 +2,7 @@ package com.lei.producer;
 
 import org.apache.kafka.clients.producer.*;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class CallbackProducer {
@@ -17,10 +18,15 @@ public class CallbackProducer {
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
         // 3. send
+        ArrayList<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+
         for (int i = 0; i < 100; i++) {
-            producer.send(new ProducerRecord<String, String>("first", "atguigu--" + i), (recordMetadata, e) -> {
+            producer.send(new ProducerRecord<String, String>("first", 0, "atguigu", "atguigu--" + i), (recordMetadata, e) -> {
                 if (recordMetadata != null) {
-                    System.out.println(recordMetadata.partition() + recordMetadata.offset());
+                    System.out.println(recordMetadata.partition() + "---" + recordMetadata.offset());
                 } else {
                     e.printStackTrace();
                 }
