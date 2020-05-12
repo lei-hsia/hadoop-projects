@@ -7,6 +7,10 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import java.util.Map;
 
 public class CounterInterceptor implements ProducerInterceptor<String, String> {
+
+    private int success;
+    private int error;
+
     @Override
     public void configure(Map<String, ?> map) {
 
@@ -19,12 +23,15 @@ public class CounterInterceptor implements ProducerInterceptor<String, String> {
 
     @Override
     public void onAcknowledgement(RecordMetadata recordMetadata, Exception e) {
-
+        if (recordMetadata != null) {
+            success++;
+        } else error++;
     }
 
     @Override
     public void close() {
-
+        System.out.println("success: "+success);
+        System.out.println("error: "+error);
     }
 
 }
