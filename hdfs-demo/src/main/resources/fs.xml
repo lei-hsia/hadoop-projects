@@ -38,3 +38,5 @@
         <nextDirectiveId>1</nextDirectiveId>
     </CacheManagerSection>
 </fsimage>
+
+        <!--hdfs oiv -p XML -i fsimage_0000000000000000000 -o fs.xml-->

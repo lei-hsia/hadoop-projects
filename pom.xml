@@ -12,6 +12,7 @@
     <modules>
         <module>kafka-demo</module>
         <module>hdfs-demo</module>
+        <module>mr</module>
     </modules>
 
 
