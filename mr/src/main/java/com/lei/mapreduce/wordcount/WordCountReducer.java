@@ -1,4 +1,4 @@
-package com.lei.mapreduce;
+package com.lei.mapreduce.wordcount;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
