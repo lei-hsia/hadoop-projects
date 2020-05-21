@@ -14,6 +14,8 @@ public class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> 
 
     @Override // 其实map的参数也可以看出，一开始拿到的KV就是<LongWritable, Text>类型
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        // 7    15797201821   www.alibaba.com   32890   2390    200
+
         // 1 获取一行
         String line = value.toString();
 
@@ -21,10 +23,15 @@ public class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> 
         String[] fields = line.split("\t");
 
         // 3 封装对象: 封装最终要输出的FlowBean对象
-        k.set(fields[1]);
-        v.setUpflow(Long.parseLong(fields[fields.length-3]));
-        v.setDownflow(Long.parseLong(fields[fields.length-2]));
-        v.setSumflow(Long.parseLong(fields[fields.length-1]));
+        String phoneNum = fields[1];
+        k.set(phoneNum);
+
+        long upflow = Long.parseLong(fields[fields.length - 3]);
+        v.setUpflow(upflow);
+        long downflow = Long.parseLong(fields[fields.length - 2]);
+        v.setUpflow(downflow);
+
+        v.set(upflow, downflow);
 
         // 4 context 写出
         context.write(k, v);

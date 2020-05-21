@@ -43,4 +43,8 @@ public class FlowBean implements Writable {
     public String toString() {
         return upflow + "\t" + downflow + "\t" + sumflow;
     }
+
+    public void set(long upflow, long downflow) {
+        this.sumflow = upflow + downflow;
+    }
 }
