@@ -26,12 +26,15 @@ public class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> 
         String phoneNum = fields[1];
         k.set(phoneNum);
 
-        long upflow = Long.parseLong(fields[fields.length - 3]);
+        /*long upflow = Long.parseLong(fields[fields.length - 3]);
         v.setUpflow(upflow);
         long downflow = Long.parseLong(fields[fields.length - 2]);
         v.setUpflow(downflow);
+        v.set(upflow, downflow);*/
 
-        v.set(upflow, downflow);
+        long upflow = Long.parseLong(fields[fields.length - 3]);
+        long downflow = Long.parseLong(fields[fields.length - 2]);
+        v.set(upflow, downflow); // set 3 fields
 
         // 4 context 写出
         context.write(k, v);

@@ -45,6 +45,9 @@ public class FlowBean implements Writable {
     }
 
     public void set(long upflow, long downflow) {
+        // 一个set方法设置所有的三个fields
+        this.upflow = upflow;
+        this.downflow = downflow;
         this.sumflow = upflow + downflow;
     }
 }
