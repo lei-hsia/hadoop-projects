@@ -12,8 +12,8 @@ import java.io.IOException;
 public class FlowCountDriver {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
-        args = new String[]{"/Users/lei/Desktop/大数据/尚硅谷hadoop/input/inputphone",
-                "/Users/lei/Desktop/大数据/尚硅谷hadoop/output/outputphone"};
+        args = new String[]{"/Users/xialei/Desktop/大数据/尚硅谷hadoop/input/inputphone",
+                "/Users/xialei/Desktop/大数据/尚硅谷hadoop/output/outputphone"};
         // 1 获取job对象
         Configuration conf  = new Configuration();
         Job job = Job.getInstance(conf);
